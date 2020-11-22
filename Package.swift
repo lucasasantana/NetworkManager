@@ -22,7 +22,7 @@ let package = Package(
             name: "NetworkManager",
             dependencies: []),
         .testTarget(
-            name: "NetworkManager1Tests",
+            name: "NetworkManagerTests",
             dependencies: ["NetworkManager"]),
     ]
 )
