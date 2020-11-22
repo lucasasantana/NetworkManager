@@ -8,13 +8,6 @@
 import XCTest
 @testable import NetworkManager
 
-private extension URL {
-    
-    static var nullURL: URL {
-        return URL(string: "mockEmptyURL.com/")!
-    }
-}
-
 class JSONEncoderTests: XCTestCase {
     
     var mockRequest: URLRequest!
