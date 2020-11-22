@@ -1,3 +1,3 @@
-# NetworkManager1
+# NetworkManager
 
 A description of this package.
