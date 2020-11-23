@@ -3,6 +3,9 @@
 
 import PackageDescription
 
+let nmt: Target = .target(name: "NetworkManager", dependencies: [])
+nmt.exclude = ["Example/"]
+
 let package = Package(
     name: "NetworkManager",
     platforms: [
@@ -21,9 +24,7 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "NetworkManager",
-            dependencies: []),
+        nmt,
         .testTarget(
             name: "NetworkManagerTests",
             dependencies: ["NetworkManager"]),

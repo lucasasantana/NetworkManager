@@ -50,7 +50,7 @@ public class NetworkManager {
     
     private var urlSession: URLSessionProvider
     
-    public init(urlSession: URLSessionProvider) {
+    public init(urlSession: URLSessionProvider = URLSession.shared) {
         self.urlSession = urlSession
     }
     
