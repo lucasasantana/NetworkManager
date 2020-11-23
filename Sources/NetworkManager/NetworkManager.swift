@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol RequestModel {
+public protocol RequestModel {
 
     associatedtype ResultModel: Decodable
     
@@ -16,9 +16,9 @@ protocol RequestModel {
     var endpoint: EndPoint { get }
 }
 
-class NetworkManager {
+public class NetworkManager {
     
-    enum NetworkError: Error {
+    public enum NetworkError: Error {
         
         case invalidParameters(EncoderError)
         
@@ -43,18 +43,18 @@ class NetworkManager {
         case deallocatedNetworkManagerObject
     }
     
-    enum ResponseResult {
+    public enum ResponseResult {
         case success
         case failure(NetworkError)
     }
     
-    var urlSession: URLSessionProvider
+    private var urlSession: URLSessionProvider
     
     init(urlSession: URLSessionProvider) {
         self.urlSession = urlSession
     }
     
-    func request<Request: RequestModel>(
+    public func request<Request: RequestModel>(
         with model: Request,
         cahcePolicy: NetworkCachePolice,
         timeout: TimeInterval,
