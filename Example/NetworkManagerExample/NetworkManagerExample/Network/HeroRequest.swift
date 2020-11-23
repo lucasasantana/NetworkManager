@@ -16,7 +16,7 @@ struct HeroEndpoint: NetworkRouterEndpoint {
     }
     
     var path: String {
-        return "v1/public/characters/1009351"
+        return "v1/public/characters/\(heroCode)"
     }
     
     var method: HTTPMethod {
