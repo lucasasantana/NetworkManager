@@ -75,7 +75,7 @@ internal class MockSessionProvider: URLSessionProvider {
     }
 }
 
-internal struct MockEndpoint: NetworkEndpoint {
+internal struct MockEndpoint: NetworkRouterEndpoint {
   
     var baseURL: URL = .nullURL
     

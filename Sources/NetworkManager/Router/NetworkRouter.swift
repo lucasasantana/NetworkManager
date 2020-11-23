@@ -20,7 +20,7 @@ public typealias NetworkRouterCompletion = (NetworkRouterResult) -> ()
 public protocol NetworkRouter: AnyObject {
     
     /// The endpoint type of this router
-    associatedtype EndPoint: NetworkEndpoint
+    associatedtype EndPoint: NetworkRouterEndpoint
     
     /// Request a data task to an endpoint
     /// - Parameters:
@@ -33,7 +33,7 @@ public protocol NetworkRouter: AnyObject {
     ///   - route: The endpoint data
     ///   - cachePolicy: The cache policy of the session
     ///   - completion: Callback containing the result of the operation
-    func request(route: EndPoint, cachePolicy: URLRequest.CachePolicy, completion: @escaping NetworkRouterCompletion)
+    func request(route: EndPoint, cachePolicy: NetworkCachePolice, completion: @escaping NetworkRouterCompletion)
     
     /// Request a data task to an endpoint
     /// - Parameters:
@@ -48,7 +48,7 @@ public protocol NetworkRouter: AnyObject {
     ///   - cachePolicy: The cache policy of the session
     ///   - timeout: The maximum time to wait for the response
     ///   - completion:  Callback containing the result of the operation
-    func request(route: EndPoint, cachePolicy: URLRequest.CachePolicy, timeout: TimeInterval, completion: @escaping NetworkRouterCompletion)
+    func request(route: EndPoint, cachePolicy: NetworkCachePolice, timeout: TimeInterval, completion: @escaping NetworkRouterCompletion)
     
     /// Suspend the current task operation
     func suspend()

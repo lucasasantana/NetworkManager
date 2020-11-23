@@ -7,7 +7,9 @@
 
 import Foundation
 
-public class Router<EndPoint: NetworkEndpoint>: NetworkRouter {
+public typealias NetworkCachePolice = URLRequest.CachePolicy
+
+public class Router<EndPoint: NetworkRouterEndpoint>: NetworkRouter {
     
     private var task: URLSessionProviderDataTask?
     
@@ -21,7 +23,7 @@ public class Router<EndPoint: NetworkEndpoint>: NetworkRouter {
         self.request(route: route, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeout: 10.0, completion: completion)
     }
     
-    public func request(route: EndPoint, cachePolicy: URLRequest.CachePolicy, completion: @escaping NetworkRouterCompletion) {
+    public func request(route: EndPoint, cachePolicy: NetworkCachePolice, completion: @escaping NetworkRouterCompletion) {
         self.request(route: route, cachePolicy: cachePolicy, timeout: 10.0, completion: completion)
     }
     
@@ -29,7 +31,7 @@ public class Router<EndPoint: NetworkEndpoint>: NetworkRouter {
         self.request(route: route, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeout: timeout, completion: completion)
     }
     
-    public func request(route: EndPoint, cachePolicy: URLRequest.CachePolicy, timeout: TimeInterval, completion: @escaping NetworkRouterCompletion) {
+    public func request(route: EndPoint, cachePolicy: NetworkCachePolice, timeout: TimeInterval, completion: @escaping NetworkRouterCompletion) {
         
         do {
             
@@ -72,7 +74,7 @@ public class Router<EndPoint: NetworkEndpoint>: NetworkRouter {
         self.task?.cancel()
     }
     
-    private func buildRequest(from route: NetworkEndpoint, cachePolicy: URLRequest.CachePolicy, timeout: TimeInterval) throws -> URLRequest {
+    private func buildRequest(from route: NetworkRouterEndpoint, cachePolicy: NetworkCachePolice, timeout: TimeInterval) throws -> URLRequest {
         
         let url = route.baseURL.appendingPathComponent(route.path)
         

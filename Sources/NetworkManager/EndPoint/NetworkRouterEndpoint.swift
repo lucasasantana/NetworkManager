@@ -1,5 +1,5 @@
 //
-//  NetworkEndpoint.swift
+//  NetworkRouterEndpoint.swift
 //  
 //
 //  Created by Lucas Antevere Santana on 22/11/20.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol NetworkEndpoint {
+public protocol NetworkRouterEndpoint {
     
     /// The base url of the host (e.g: www.google.com)
     var baseURL: URL          { get }
