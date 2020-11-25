@@ -1,5 +1,5 @@
 //
-//  HeroViewController.swift
+//  PokemonViewController.swift
 //  NetworkManagerExample
 //
 //  Created by Lucas Antevere Santana on 23/11/20.
@@ -7,20 +7,20 @@
 
 import UIKit
 
-class HeroViewController: UIViewController {
+class PokemonViewController: UIViewController {
     
-    var heroView: HeroView {
-        return view as! HeroView
+    var pokemonView: PokemonView {
+        return view as! PokemonView
     }
     
-    var heroBusinessLogic: HeroBusinessLogicProtocol = HeroBusinessLogic()
+    var pokemonBusinessLogic: PokemonBusinessLogicProtocol = PokemonBusinessLogic()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        heroView.delegate = self
-        heroView.emptyContent()
+        pokemonView.delegate = self
+        pokemonView.emptyContent()
         
     }
     
@@ -40,34 +40,31 @@ class HeroViewController: UIViewController {
     func presetLoadAlert() {
         
         let controller = UIAlertController(
-            title: "Loading hero...",
+            title: "Loading pokemon...",
             message: nil,
             preferredStyle: .alert)
-        
-        
-        controller.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
         present(controller, animated: true, completion: nil)
     }
 }
 
-extension HeroViewController: HeroViewDelegate {
+extension PokemonViewController: PokemonViewDelegate {
     
-    func heroViewDidTapButton() {
+    func pokemonViewDidTapButton() {
         
         presetLoadAlert()
         
-        heroBusinessLogic.loadHero(withCode: 1009351) { [weak self] (result) in
+        pokemonBusinessLogic.loadPokemon(withName: "ditto") { [weak self] (result) in
             
             self?.presentedViewController?.dismiss(animated: true, completion: nil)
             
             switch result {
                 
-                case .success(let hero):
+                case .success(let pokemon):
                     
-                    let image = UIImage(data: hero.imageData)
+                    let image = UIImage(data: pokemon.imageData)
                     
-                    self?.heroView.display(title: hero.title, image: image)
+                    self?.pokemonView.display(title: pokemon.title, image: image)
                     
                 case .failure(let error):
                     self?.presentAlert(of: error)

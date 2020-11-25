@@ -8,8 +8,8 @@
 import Foundation
 import NetworkManager
 
-protocol HeroNetworkLayer {
-    func request(heroWithCode heroCode: Int, completion: @escaping (Result<Hero, Error>) -> Void)
+protocol PokemonNetworkLayer {
+    func request(pokemonWithName pokemonName: String, completion: @escaping (Result<Pokemon, Error>) -> Void)
 }
 
 class NetworkLayer {
@@ -18,17 +18,14 @@ class NetworkLayer {
     
     static let shared: NetworkLayer = NetworkLayer()
     
-    // May have to generate one at https://developer.marvel.com
-    static let apiKey = "46f88463a94d916b176b8d478243c2fc"
-    
     private init() {}
 }
 
-extension NetworkLayer: HeroNetworkLayer {
+extension NetworkLayer: PokemonNetworkLayer {
     
-    func request(heroWithCode heroCode: Int, completion: @escaping (Result<Hero, Error>) -> Void) {
+    func request(pokemonWithName pokemonName: String, completion: @escaping (Result<Pokemon, Error>) -> Void) {
         
-        let requestModel = HeroRequest(heroCode: heroCode)
+        let requestModel = PokemonRequest(pokemonName: pokemonName)
         
         manager.request(with: requestModel, cahcePolicy: .useProtocolCachePolicy, timeout: 10.0) { (result) in
             
@@ -38,9 +35,9 @@ extension NetworkLayer: HeroNetworkLayer {
                     
                     do {
                         
-                        let hero = try model.toHero()
+                        let pokemon = try model.toPokemon()
                         
-                        completion(.success(hero))
+                        completion(.success(pokemon))
                         
                     } catch {
                         completion(.failure(error))
